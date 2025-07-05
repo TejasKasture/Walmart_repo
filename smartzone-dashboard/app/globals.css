@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 100% 20%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 100% 20%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 100% 20%;
+    --primary: 210 100% 40%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 210 100% 20%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 210 20% 50%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 210 100% 20%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 210 30% 90%;
+    --input: 210 30% 90%;
+    --ring: 210 100% 40%;
+    --radius: 0.5rem;
+    --chart-1: 210 100% 50%;
+    --chart-2: 210 80% 60%;
+    --chart-3: 210 60% 70%;
+    --chart-4: 210 40% 80%;
+    --chart-5: 210 20% 90%;
+
+    /* Walmart specific colors */
+    --walmart-blue: 210 100% 40%;
+    --walmart-light-blue: 210 100% 85%;
+    --walmart-dark-blue: 210 100% 25%;
+    --walmart-yellow: 48 100% 50%;
+    --walmart-gray: 210 10% 50%;
+  }
+
+  .dark {
+    --background: 210 100% 4%;
+    --foreground: 0 0% 98%;
+    --card: 210 100% 6%;
+    --card-foreground: 0 0% 98%;
+    --popover: 210 100% 6%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 210 100% 60%;
+    --primary-foreground: 210 100% 4%;
+    --secondary: 210 50% 12%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 210 50% 12%;
+    --muted-foreground: 210 20% 70%;
+    --accent: 210 50% 12%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 210 50% 12%;
+    --input: 210 50% 12%;
+    --ring: 210 100% 60%;
+    --chart-1: 210 100% 60%;
+    --chart-2: 210 80% 70%;
+    --chart-3: 210 60% 80%;
+    --chart-4: 210 40% 90%;
+    --chart-5: 210 20% 95%;
+
+    /* Walmart dark theme colors */
+    --walmart-blue: 210 100% 60%;
+    --walmart-light-blue: 210 100% 20%;
+    --walmart-dark-blue: 210 100% 80%;
+    --walmart-yellow: 48 100% 60%;
+    --walmart-gray: 210 10% 70%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Walmart-themed animations */
+@keyframes walmart-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px hsl(var(--walmart-blue));
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--walmart-blue)), 0 0 30px hsl(var(--walmart-light-blue));
+  }
+}
+
+@keyframes walmart-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes walmart-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-walmart-glow {
+  animation: walmart-glow 2s ease-in-out infinite;
+}
+
+.animate-walmart-pulse {
+  animation: walmart-pulse 2s ease-in-out infinite;
+}
+
+.animate-walmart-float {
+  animation: walmart-float 3s ease-in-out infinite;
+}
+
+/* Walmart glassmorphism effects */
+.walmart-glass {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(0, 100, 200, 0.1);
+  border: 1px solid rgba(0, 100, 200, 0.2);
+}
+
+.walmart-glass-dark {
+  backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(0, 50, 100, 0.2);
+  border: 1px solid rgba(0, 100, 200, 0.3);
+}
+
+/* Walmart gradient */
+.walmart-gradient {
+  background: linear-gradient(135deg, #0071ce, #004c91, #ffc220);
+  background-size: 400% 400%;
+  animation: walmart-gradient-shift 4s ease infinite;
+}
+
+@keyframes walmart-gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Walmart scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 113, 206, 0.1);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #0071ce, #004c91);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #004c91, #003d73);
+}
+
+/* Walmart themed tooltips */
+.recharts-tooltip-wrapper {
+  filter: drop-shadow(0 4px 6px rgba(0, 113, 206, 0.2));
+}
+
+/* Responsive design enhancements */
+@media (max-width: 768px) {
+  .walmart-glass,
+  .walmart-glass-dark {
+    backdrop-filter: blur(8px);
+  }
+}
