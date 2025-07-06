@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import {
   BarChart,
   Bar,
@@ -35,6 +35,7 @@ import {
   Wifi,
   Database,
   Thermometer,
+  LucideIcon,
 } from "lucide-react"
 import { ThemeProvider, useTheme } from "../contexts/theme-context"
 import { FuturisticCard } from "../components/futuristic-card"
@@ -46,13 +47,71 @@ import { PredictiveAnalytics } from "../components/predictive-analytics"
 import { HeatmapVisualization } from "../components/heatmap-visualization"
 import { AdvancedHeatmapControls } from "../components/advanced-heatmap-controls"
 
+// Type definitions
+interface LiveData {
+  totalVisitors?: number
+  activeZones?: number
+  detectionAccuracy?: number
+  systemUptime?: number
+  peakZone?: string
+  aiProcessingSpeed?: number
+  networkLatency?: number
+  dataProcessed?: number
+  currentTraffic?: Record<string, number>
+}
+
+interface Recommendation {
+  id: number
+  product: string
+  fromZone: string
+  toZone: string
+  revenueImpact: string
+  confidence: number
+  effort: string
+  reason: string
+  aiScore: number
+  implementationTime: string
+  riskLevel: string
+}
+
+interface Notification {
+  id: number
+  type: string
+  message: string
+  time: string
+}
+
+interface PerformanceMetric {
+  name: string
+  value: string
+  color: string
+  icon: LucideIcon
+  trend: string
+}
+
+interface TabButtonProps {
+  id: string
+  label: string
+  isActive: boolean
+  onClick: (id: string) => void
+  icon: LucideIcon
+}
+
+interface EnhancedMetricCardProps {
+  metric: PerformanceMetric
+}
+
+interface EnhancedRecommendationCardProps {
+  rec: Recommendation
+}
+
 function SmartZoneDashboard() {
   const { theme, toggleTheme } = useTheme()
   const [activeTab, setActiveTab] = useState("overview")
-  const [liveData, setLiveData] = useState({})
-  const [recommendations, setRecommendations] = useState([])
+  const [liveData, setLiveData] = useState<LiveData>({})
+  const [recommendations, setRecommendations] = useState<Recommendation[]>([])
   const [selectedSeason, setSelectedSeason] = useState("summer")
-  const [notifications, setNotifications] = useState([])
+  const [notifications, setNotifications] = useState<Notification[]>([])
   const [isFullscreen, setIsFullscreen] = useState(false)
 
   // Enhanced real-time data simulation
@@ -82,7 +141,7 @@ function SmartZoneDashboard() {
 
   // Enhanced recommendations with more features
   useEffect(() => {
-    const mockRecommendations = [
+    const mockRecommendations: Recommendation[] = [
       {
         id: 1,
         product: "Air Conditioners & Coolers",
@@ -129,7 +188,7 @@ function SmartZoneDashboard() {
 
   // Notification system
   useEffect(() => {
-    const mockNotifications = [
+    const mockNotifications: Notification[] = [
       { id: 1, type: "alert", message: "Zone A1 approaching capacity", time: "2 min ago" },
       { id: 2, type: "success", message: "AI model updated successfully", time: "5 min ago" },
       { id: 3, type: "info", message: "New seasonal pattern detected", time: "10 min ago" },
@@ -139,9 +198,9 @@ function SmartZoneDashboard() {
 
   const zoneTrafficData = Object.entries(liveData.currentTraffic || {}).map(([zone, count]) => ({
     zone,
-    visitors: count,
+    visitors: count as number,
     capacity: 250,
-    utilization: Math.round((count / 250) * 100),
+    utilization: Math.round(((count as number) / 250) * 100),
   }))
 
   const seasonalTrendData = [
@@ -207,7 +266,7 @@ function SmartZoneDashboard() {
     },
   ]
 
-  const TabButton = ({ id, label, isActive, onClick, icon: Icon }) => (
+  const TabButton: React.FC<TabButtonProps> = ({ id, label, isActive, onClick, icon: Icon }) => (
     <button
       onClick={() => onClick(id)}
       className={`flex items-center space-x-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
@@ -221,7 +280,7 @@ function SmartZoneDashboard() {
     </button>
   )
 
-  const EnhancedMetricCard = ({ metric }) => {
+  const EnhancedMetricCard: React.FC<EnhancedMetricCardProps> = ({ metric }) => {
     const Icon = metric.icon
     return (
       <FuturisticCard glowColor="blue" animated className="p-6">
@@ -247,7 +306,7 @@ function SmartZoneDashboard() {
     )
   }
 
-  const EnhancedRecommendationCard = ({ rec }) => (
+  const EnhancedRecommendationCard: React.FC<EnhancedRecommendationCardProps> = ({ rec }) => (
     <FuturisticCard glowColor="green" animated className="p-6">
       <div className="flex justify-between items-start mb-4">
         <div className="flex-1">

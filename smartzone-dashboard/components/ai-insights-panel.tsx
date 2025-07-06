@@ -1,15 +1,24 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Brain, Lightbulb, TrendingUp, AlertTriangle, Zap } from "lucide-react"
+import React, { useState, useEffect } from "react"
+import { Brain, Lightbulb, TrendingUp, AlertTriangle, Zap, LucideIcon } from "lucide-react"
 import { FuturisticCard } from "./futuristic-card"
 
+interface AIInsight {
+  type: string
+  icon: LucideIcon
+  title: string
+  message: string
+  confidence: number
+  color: "blue" | "white" | "yellow" | "gray" | "green" | "purple" | "cyan" | "red"
+}
+
 export function AIInsightsPanel() {
-  const [insights, setInsights] = useState([])
+  const [insights, setInsights] = useState<AIInsight[]>([])
   const [currentInsight, setCurrentInsight] = useState(0)
 
   useEffect(() => {
-    const aiInsights = [
+    const aiInsights: AIInsight[] = [
       {
         type: "prediction",
         icon: Brain,

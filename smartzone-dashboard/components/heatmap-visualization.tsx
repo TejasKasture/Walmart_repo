@@ -96,7 +96,7 @@ export function HeatmapVisualization() {
       // Zone labels
       ctx.fillStyle = zone.color
       ctx.font = "12px Inter, sans-serif"
-      ctx.fontWeight = "600"
+      ctx.font = "600 12px Inter, sans-serif"
       ctx.textAlign = "center"
       ctx.fillText(zone.name, zone.x + zone.width / 2, zone.y + zone.height / 2)
       ctx.fillText(zone.id, zone.x + zone.width / 2, zone.y + zone.height / 2 + 15)
@@ -184,21 +184,21 @@ export function HeatmapVisualization() {
       title: "Customer Density",
       description: "Real-time visitor concentration",
       icon: Users,
-      color: "red",
+      color: "blue" as const,
       unit: "people/m²",
     },
     movement: {
       title: "Movement Patterns",
       description: "Customer flow and navigation",
       icon: Activity,
-      color: "blue",
+      color: "blue" as const,
       unit: "m/min",
     },
     dwell: {
       title: "Dwell Time",
       description: "Time spent in each area",
       icon: Clock,
-      color: "purple",
+      color: "blue" as const,
       unit: "minutes",
     },
   }

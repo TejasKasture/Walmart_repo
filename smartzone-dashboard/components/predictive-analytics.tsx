@@ -1,18 +1,25 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import { XAxis, YAxis, ResponsiveContainer, Area, AreaChart } from "recharts"
 import { FuturisticCard } from "./futuristic-card"
 import { SnowflakeIcon as Crystal, TrendingUp, AlertCircle } from "lucide-react"
 
+interface Prediction {
+  hour: string
+  current: number
+  predicted: number
+  confidence: number
+}
+
 export function PredictiveAnalytics() {
-  const [predictions, setPredictions] = useState([])
+  const [predictions, setPredictions] = useState<Prediction[]>([])
   const [selectedMetric, setSelectedMetric] = useState("traffic")
 
   useEffect(() => {
     const generatePredictions = () => {
       const hours = Array.from({ length: 24 }, (_, i) => i)
-      const trafficPredictions = hours.map((hour) => ({
+      const trafficPredictions: Prediction[] = hours.map((hour) => ({
         hour: `${hour}:00`,
         current: Math.floor(Math.random() * 200) + 100,
         predicted: Math.floor(Math.random() * 250) + 120,
